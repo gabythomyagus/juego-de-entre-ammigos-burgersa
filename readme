@@ -1,0 +1,13 @@
+# 🎮 Repartidor con Capucha
+
+Un mini-juego tipo Mario Bros pero con la temática de un repartidor que debe cumplir misiones.
+
+## 🚀 Cómo jugar
+- **Flecha derecha** → mover derecha
+- **Flecha izquierda** → mover izquierda
+- **Espacio** → saltar
+- Objetivo: llegar al paquete y entregarlo ✅
+
+## 📂 Estructura
+- `index.html` → interfaz y canvas
+- `style.css` → es
