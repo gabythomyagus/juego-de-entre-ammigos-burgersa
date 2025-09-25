@@ -6,6 +6,8 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+let score = 0; // 👈 NUEVO: contador de puntos
+
 let player = {
   x: 50,
   y: canvas.height - 150,
@@ -38,6 +40,12 @@ function drawPackage() {
   ctx.drawImage(packageImg, package.x, package.y, package.width, package.height);
 }
 
+function drawScore() {
+  ctx.font = "24px Arial";
+  ctx.fillStyle = "white";
+  ctx.fillText("Puntos: " + score, 20, 40);
+}
+
 function update() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -58,19 +66,26 @@ function update() {
 
   drawPlayer();
   drawPackage();
+  drawScore(); // 👈 mostrar el puntaje en pantalla
 
-  // Colisión con el paquete (mision cumplida)
+  // Colisión con el paquete (misión cumplida)
   if (
     player.x < package.x + package.width &&
     player.x + player.width > package.x &&
     player.y < package.y + package.height &&
     player.y + player.height > package.y
   ) {
-    alert("¡Misión cumplida! Entrega realizada ✅");
-    document.location.reload();
+    score += 10; // 👈 suma 10 puntos por entrega
+    resetPackage(); // mover el paquete a otro lugar
   }
 
   requestAnimationFrame(update);
+}
+
+function resetPackage() {
+  // 👈 el paquete aparece en otra parte aleatoria
+  package.x = Math.random() * (canvas.width - 100);
+  package.y = canvas.height - 150;
 }
 
 document.addEventListener("keydown", (e) => {
@@ -78,3 +93,17 @@ document.addEventListener("keydown", (e) => {
   if (e.key === " " && !player.jumping) {
     player.jumping = true;
     player.velocityY = -15;
+  }
+});
+
+document.addEventListener("keyup", (e) => {
+  keys[e.key] = false;
+});
+
+// Cambiar sprite al iniciar
+startBtn.addEventListener("click", () => {
+  player.image.src = "assets/capucha.png";
+  menu.style.display = "none";
+  canvas.style.display = "block";
+  update();
+});
