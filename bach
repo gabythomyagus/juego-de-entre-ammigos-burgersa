@@ -1,0 +1,10 @@
+repartidor-game/
+│── index.html
+│── style.css
+│── script.js
+│── assets/
+│    ├── player.png   (personaje)
+│    ├── capucha.png  (versión con capucha)
+│    ├── package.png  (paquete/misión)
+│    └── bg.png       (fondo)
+│── README.md
